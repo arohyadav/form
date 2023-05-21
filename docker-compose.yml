@@ -28,7 +28,6 @@ services:
       - PGDATABASE=mydb
       - PGPASSWORD=password
       - PGPORT=5432
-      - DB_DIALECT=postgres
   client:
     stdin_open: true
     environment:
