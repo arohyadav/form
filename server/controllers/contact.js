@@ -14,7 +14,7 @@ const sequelize = new Sequelize({
   database: keys.pgDatabase,
   password: keys.pgPassword,
   port: keys.pgPort,
-  dialect: keys.pgDialect,
+  dialect: 'postgres'
 });
 
 
