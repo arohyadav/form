@@ -17,17 +17,17 @@
 //   dialect: keys.pgDialect
 // });
 
-<<<<<<< HEAD
-=======
-const sequelize = new Sequelize({
-  user: keys.pgUser,
-  host: keys.pgHost,
-  database: keys.pgDatabase,
-  password: keys.pgPassword,
-  port: keys.pgPort,
-  dialect: 'postgres'
-});
->>>>>>> 6e467b98fc701487f4bee926150b83a50119b6a7
+// <<<<<<< HEAD
+// =======
+// const sequelize = new Sequelize({
+//   user: keys.pgUser,
+//   host: keys.pgHost,
+//   database: keys.pgDatabase,
+//   password: keys.pgPassword,
+//   port: keys.pgPort,
+//   dialect: 'postgres'
+// });
+// >>>>>>> 6e467b98fc701487f4bee926150b83a50119b6a7
 
 // const validUrl = require('valid-url');
 
