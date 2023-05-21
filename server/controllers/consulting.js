@@ -10,7 +10,6 @@ const sequelize = new Sequelize({
   dialect: keys.pgDialect
 });
 
-
 const validUrl = require('valid-url');
 
 async function validateCompanyUrl(companyurl) {
@@ -28,7 +27,6 @@ async function validateCompanyUrl(companyurl) {
     return false;
   }
 }
-
 
 // test the database connection
 async function testConnection() {
@@ -99,34 +97,9 @@ const consulting = sequelize.define(
 // Create the table in the database
 consulting.sync();
 
-exports.consultingForm = async (req, res) => {
-  const {
-    firstname,
-    lastname,
-    email,
-    phonenumber,
-    companyname,
-    companyurl,
-    industry,
-    pickdate,
-    whatisyourissue,
-  } = req.body;
-
-  try {
-    const existingUser = await consulting.findOne({ where: { email } });
-    if (existingUser) {
-      console.error(`User with email ${email} already exists`);
-      return res.status(400).send('User with this email already exists');
-    }
-
-    const isValidCompanyUrl = await validateCompanyUrl(companyurl);
-    if (!isValidCompanyUrl) {
-      console.error('Invalid company URL');
-      return res.status(400).send('Invalid company URL');
-    }
-
-    const newUser = consulting.build({
-      ID: null,
+const consultingForm = {
+  async submitForm(req, res) {
+    const {
       firstname,
       lastname,
       email,
@@ -136,12 +109,43 @@ exports.consultingForm = async (req, res) => {
       industry,
       pickdate,
       whatisyourissue,
-    });
+    } = req.body;
 
-    await newUser.save();
-    return res.send('Form data inserted into database');
-  } catch (error) {
-    console.error(error);
-    return res.status(500).send('Error inserting form data into database');
+    try {
+      const existingUser = await consulting.findOne({ where: { email } });
+      if (existingUser) {
+        console.error(`User with email ${email} already exists`);
+        return res.status(400).send('User with this email already exists');
+      }
+
+      const isValidCompanyUrl = await validateCompanyUrl(companyurl);
+      if (!isValidCompanyUrl) {
+        console.error('Invalid company URL');
+        return res.status(400).send('Invalid company URL');
+      }
+
+      const newUser = consulting.build({
+        ID: null,
+        firstname,
+        lastname,
+        email,
+        phonenumber,
+        companyname,
+        companyurl,
+        industry,
+        pickdate,
+        whatisyourissue,
+      });
+
+      await newUser.save();
+      return res.send('Form data inserted into database');
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send('Error inserting form data into database');
+    }
   }
+};
+
+module.exports = {
+  consultingForm
 };

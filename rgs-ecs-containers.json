@@ -1,41 +1,76 @@
 {
     "requiresCompatibilities": [
-        "FARGATE"
+      "FARGATE"
     ],
-    "family": "rgs-ecs-containers",
+    "family": "rgs-tech-3containers",
     "containerDefinitions": [
-        {
-            "name": "client",
-            "image": "685898574663.dkr.ecr.us-east-1.amazonaws.com/client",
-            "essential": true,
-            "memory": 1536,
-            "cpu": 512
-        },
-        {
-            "name": "api",
-            "image": "685898574663.dkr.ecr.us-east-1.amazonaws.com/api",
-            "essential": true,
-            "memory": 512,
-            "cpu": 256
-        },
-        {
-            "name": "nginx",
-            "image": "685898574663.dkr.ecr.us-east-1.amazonaws.com/nginx",
-            "essential": true,
-            "memory": 1024,
-            "cpu": 256,
-            "portMappings": [
-                {
-                    "containerPort": 80,
-                    "hostPort": 80,
-                    "protocol": "tcp"
-                }
-            ]
+      {
+        "name": "client",
+        "image": "685898574663.dkr.ecr.us-east-1.amazonaws.com/client",
+        "essential": true,
+        "memory": 1536,
+        "cpu": 512
+      },
+      {
+        "name": "api",
+        "image": "685898574663.dkr.ecr.us-east-1.amazonaws.com/server",
+        "essential": true,
+        "memory": 512,
+        "cpu": 256,
+        "environment": [
+          {
+            "name": "PGUSER",
+            "value": "postgres"
+          },
+          {
+            "name": "PGHOST",
+            "value": "database-1.cuhephxwwjxs.us-east-1.rds.amazonaws.com"
+          },
+          {
+            "name": "PGDATABASE",
+            "value": "mydb"
+          },
+          {
+            "name": "PGPASSWORD",
+            "value": "password"
+          },
+          {
+            "name": "PGPORT",
+            "value": "5432"
+          },
+          {
+            "name": "DB_DIALECT",
+            "value": "postgres"
+          }
+        ],
+        "logConfiguration": {
+          "logDriver": "awslogs",
+          "options": {
+            "awslogs-group": "/ecs/api",
+            "awslogs-region": "us-east-1",
+            "awslogs-stream-prefix": "ecs"
+          }
         }
+      },
+      {
+        "name": "nginx",
+        "image": "685898574663.dkr.ecr.us-east-1.amazonaws.com/nginx",
+        "essential": true,
+        "memory": 1024,
+        "cpu": 256,
+        "portMappings": [
+          {
+            "containerPort": 80,
+            "hostPort": 80,
+            "protocol": "tcp"
+          }
+        ]
+      }
     ],
     "volumes": [],
     "networkMode": "awsvpc",
     "memory": "3 GB",
     "cpu": "1 vCPU",
-    "executionRoleArn": "arn:aws:iam::685898574663:role/RGS-ECS-RDS"
-}
+    "executionRoleArn": "arn:aws:iam::685898574663:role/rgs-ecs-task-role-final",
+    "taskRoleArn": "arn:aws:iam::685898574663:role/rgs-ecs-task-role-final"
+  }  

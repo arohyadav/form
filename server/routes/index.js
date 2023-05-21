@@ -4,7 +4,10 @@ const { consultingForm } = require('../controllers/consulting');
 
 const router = Router();
 
-router.post('/contact', contactForm)
-router.post('/consulting', consultingForm)
+router.post('/contact', contactForm.submitForm);
+router.post('/consulting', consultingForm.submitForm);
 
-module.exports = router;
+module.exports = {
+  consultingForm: consultingForm.submitForm,
+  contactForm: contactForm.submitForm
+};
