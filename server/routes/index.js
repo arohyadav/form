@@ -1,13 +1,9 @@
-const { Router } = require('express');
-const { contactForm } = require('../controllers/contact');
-const { consultingForm } = require('../controllers/consulting');
+// const { Router } = require('express');
+// const { contactForm } = require('../controllers/contact');
+// const { consultingForm } = require('../controllers/consulting');
 
-const router = Router();
+// const router = Router();
 
-router.post('/contact', contactForm.submitForm);
-router.post('/consulting', consultingForm.submitForm);
+// router.get('/consulting', consultingForm);
 
-module.exports = {
-  consultingForm: consultingForm.submitForm,
-  contactForm: contactForm.submitForm
-};
+// module.exports = router;
