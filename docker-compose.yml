@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  postgres:
+    restart: always
+    image: "postgres:14-alpine"
+    environment:
+      - PGPASSWORD=postgres_password
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      dockerfile: Dockerfile.prod
+      context: ./nginx
+    ports:
+      - "3050:80"
+  api:
+    build:
+      dockerfile: Dockerfile.prod
+      context: "./server"
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - PGUSER=postgres
+      - PGHOST=database-1.cuhephxwwjxs.us-east-1.rds.amazonaws.com
+      - PGDATABASE=mydb
+      - PGPASSWORD=password
+      - PGPORT=5432
+      - DB_DIALECT=postgres
+  client:
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      dockerfile: Dockerfile.prod
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
