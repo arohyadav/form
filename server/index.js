@@ -8,23 +8,23 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-const pgClient = new Pool({
-  user: 'postgres',
-  host: 'database-1.cuhephxwwjxs.us-east-1.rds.amazonaws.com',
-  database: 'mydb',
-  password: 'password',
-  port: '5432',
-});
-
-
-// // Postgres Client Setup
 // const pgClient = new Pool({
-//   user: keys.pgUser,
-//   host: keys.pgHost,
-//   database: keys.pgDatabase,
-//   password: keys.pgPassword,
-//   port: keys.pgPort,
+//   user: 'postgres',
+//   host: 'database-1.cuhephxwwjxs.us-east-1.rds.amazonaws.com',
+//   database: 'mydb',
+//   password: 'password',
+//   port: '5432',
 // });
+
+
+// Postgres Client Setup
+const pgClient = new Pool({
+  user: keys.pgUser,
+  host: keys.pgHost,
+  database: keys.pgDatabase,
+  password: keys.pgPassword,
+  port: keys.pgPort,
+});
 
 // Create the table if it doesn't exist
 pgClient.query(
