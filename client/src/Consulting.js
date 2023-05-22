@@ -26,7 +26,7 @@ const Consulting = () => {
     e.preventDefault();
     console.log(formValues);
     try {
-      const res = await axios.post('http://localhost:5000/api/consulting', formValues);
+      const res = await axios.post('/api/consulting', formValues);
       console.log(res.data);
     } catch (err) {
       console.error(err);
