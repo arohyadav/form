@@ -8,6 +8,7 @@
 // //   port: 5432,
 // // });
 
+
 // const sequelize = new Sequelize({
 //   user: keys.pgUser,
 //   host: keys.pgHost,
@@ -17,17 +18,6 @@
 //   dialect: keys.pgDialect
 // });
 
-// <<<<<<< HEAD
-// =======
-// const sequelize = new Sequelize({
-//   user: keys.pgUser,
-//   host: keys.pgHost,
-//   database: keys.pgDatabase,
-//   password: keys.pgPassword,
-//   port: keys.pgPort,
-//   dialect: 'postgres'
-// });
-// >>>>>>> 6e467b98fc701487f4bee926150b83a50119b6a7
 
 // const validUrl = require('valid-url');
 
@@ -46,6 +36,7 @@
 //     return false;
 //   }
 // }
+
 // // const sequelize = new Sequelize(
 // //   "postgres://postgres:arohyadav@localhost:5432/postgres"
 // // );
@@ -61,8 +52,8 @@
 // }
 
 // // define a model for the 'career' table
-// const contact = sequelize.define(
-//   "contact",
+// const consulting = sequelize.define(
+//   "consulting",
 //   {
 //     ID: {
 //       type: DataTypes.INTEGER,
@@ -90,10 +81,14 @@
 //       allowNull: false,
 //     },
 //     companyurl: {
-//       type: DataTypes.STRING,
+//       type: DataTypes.STRING(255),
 //       allowNull: false,
 //     },
 //     industry: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//     },
+//     pickdate: {
 //       type: DataTypes.STRING,
 //       allowNull: false,
 //     },
@@ -104,7 +99,7 @@
 //   },
 //   {
 //     // Options
-//     tableName: "contact",
+//     tableName: "consulting",
 //     timestamps: true,
 //     underscrored: true,
 //     createdAt: "created_at",
@@ -113,9 +108,9 @@
 // );
 
 // // Create the table in the database
-// contact.sync();
+// consulting.sync();
 
-// exports.contactForm = async (req, res) => {
+// exports.consultingForm = async (req, res) => {
 //   const {
 //     firstname,
 //     lastname,
@@ -124,11 +119,12 @@
 //     companyname,
 //     companyurl,
 //     industry,
+//     pickdate,
 //     whatisyourissue,
 //   } = req.body;
 
 //   try {
-//     const existingUser = await contact.findOne({ where: { email } });
+//     const existingUser = await consulting.findOne({ where: { email } });
 //     if (existingUser) {
 //       console.error(`User with email ${email} already exists`);
 //       return res.status(400).send('User with this email already exists');
@@ -140,7 +136,7 @@
 //       return res.status(400).send('Invalid company URL');
 //     }
 
-//     const newUser = contact.build({
+//     const newUser = consulting.build({
 //       ID: null,
 //       firstname,
 //       lastname,
@@ -149,6 +145,7 @@
 //       companyname,
 //       companyurl,
 //       industry,
+//       pickdate,
 //       whatisyourissue,
 //     });
 

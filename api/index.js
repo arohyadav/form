@@ -5,17 +5,14 @@ const { Pool } = require('pg');
 const keys = require('./keys');
 
 const app = express();
-app.use(cors());
-app.use(bodyParser.json());
 
 // const pgClient = new Pool({
 //   user: 'postgres',
-//   host: 'database-1.cuhephxwwjxs.us-east-1.rds.amazonaws.com',
-//   database: 'mydb',
-//   password: 'password',
-//   port: '5432',
+//   host: 'localhost',
+//   database: 'postgres',
+//   password: 'arohyadav',
+//   port: 5432,
 // });
-
 
 // Postgres Client Setup
 const pgClient = new Pool({
@@ -25,6 +22,15 @@ const pgClient = new Pool({
   password: keys.pgPassword,
   port: keys.pgPort,
 });
+
+pgClient
+  .connect()
+  .then(() => {
+    console.log('Connected to the database');
+  })
+  .catch((err) => {
+    console.error('Error connecting to the database:', err);
+  });
 
 // Create the table if it doesn't exist
 pgClient.query(

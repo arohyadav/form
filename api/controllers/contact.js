@@ -1,14 +1,22 @@
 // const { Sequelize, DataTypes } = require("sequelize");
 // const keys = require('../keys');
 
+// // create a database connection
+// // const sequelize = new Sequelize("mydb", "postgres", "password", {
+// //   host: "database-1.cuhephxwwjxs.us-east-1.rds.amazonaws.com",
+// //   dialect: "postgres",
+// //   port: 5432,
+// // });
+
 // const sequelize = new Sequelize({
-//   user: 'postgres',
-//   host: 'database-1.cuhephxwwjxs.us-east-1.rds.amazonaws.com',
-//   database: 'mydb',
-//   password: 'password',
-//   port: '5432',
-//   dialect: 'postgres'
+//   user: keys.pgUser,
+//   host: keys.pgHost,
+//   database: keys.pgDatabase,
+//   password: keys.pgPassword,
+//   port: keys.pgPort,
+//   dialect: keys.pgDialect,
 // });
+
 
 // const validUrl = require('valid-url');
 
@@ -27,6 +35,9 @@
 //     return false;
 //   }
 // }
+// // const sequelize = new Sequelize(
+// //   "postgres://postgres:arohyadav@localhost:5432/postgres"
+// // );
 
 // // test the database connection
 // async function testConnection() {
@@ -39,8 +50,8 @@
 // }
 
 // // define a model for the 'career' table
-// const consulting = sequelize.define(
-//   "consulting",
+// const contact = sequelize.define(
+//   "contact",
 //   {
 //     ID: {
 //       type: DataTypes.INTEGER,
@@ -68,14 +79,10 @@
 //       allowNull: false,
 //     },
 //     companyurl: {
-//       type: DataTypes.STRING(255),
-//       allowNull: false,
-//     },
-//     industry: {
 //       type: DataTypes.STRING,
 //       allowNull: false,
 //     },
-//     pickdate: {
+//     industry: {
 //       type: DataTypes.STRING,
 //       allowNull: false,
 //     },
@@ -86,7 +93,7 @@
 //   },
 //   {
 //     // Options
-//     tableName: "consulting",
+//     tableName: "contact",
 //     timestamps: true,
 //     underscrored: true,
 //     createdAt: "created_at",
@@ -95,11 +102,35 @@
 // );
 
 // // Create the table in the database
-// consulting.sync();
+// contact.sync();
 
-// const consultingForm = {
-//   async submitForm(req, res) {
-//     const {
+// exports.contactForm = async (req, res) => {
+//   const {
+//     firstname,
+//     lastname,
+//     email,
+//     phonenumber,
+//     companyname,
+//     companyurl,
+//     industry,
+//     whatisyourissue,
+//   } = req.body;
+
+//   try {
+//     const existingUser = await contact.findOne({ where: { email } });
+//     if (existingUser) {
+//       console.error(`User with email ${email} already exists`);
+//       return res.status(400).send('User with this email already exists');
+//     }
+
+//     const isValidCompanyUrl = await validateCompanyUrl(companyurl);
+//     if (!isValidCompanyUrl) {
+//       console.error('Invalid company URL');
+//       return res.status(400).send('Invalid company URL');
+//     }
+
+//     const newUser = contact.build({
+//       ID: null,
 //       firstname,
 //       lastname,
 //       email,
@@ -107,45 +138,13 @@
 //       companyname,
 //       companyurl,
 //       industry,
-//       pickdate,
 //       whatisyourissue,
-//     } = req.body;
+//     });
 
-//     try {
-//       const existingUser = await consulting.findOne({ where: { email } });
-//       if (existingUser) {
-//         console.error(`User with email ${email} already exists`);
-//         return res.status(400).send('User with this email already exists');
-//       }
-
-//       const isValidCompanyUrl = await validateCompanyUrl(companyurl);
-//       if (!isValidCompanyUrl) {
-//         console.error('Invalid company URL');
-//         return res.status(400).send('Invalid company URL');
-//       }
-
-//       const newUser = consulting.build({
-//         ID: null,
-//         firstname,
-//         lastname,
-//         email,
-//         phonenumber,
-//         companyname,
-//         companyurl,
-//         industry,
-//         pickdate,
-//         whatisyourissue,
-//       });
-
-//       await newUser.save();
-//       return res.send('Form data inserted into database');
-//     } catch (error) {
-//       console.error(error);
-//       return res.status(500).send('Error inserting form data into database');
-//     }
+//     await newUser.save();
+//     return res.send('Form data inserted into database');
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).send('Error inserting form data into database');
 //   }
-// };
-
-// module.exports = {
-//   consultingForm
 // };

@@ -4,6 +4,7 @@
 
 // const router = Router();
 
-// router.get('/consulting', consultingForm);
+// router.post('/contact', contactForm)
+// router.post('/consulting', consultingForm)
 
 // module.exports = router;
