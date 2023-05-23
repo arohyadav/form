@@ -18,17 +18,16 @@ services:
   api:
     build:
       dockerfile: Dockerfile.prod
-      context: "./server"
+      context: "./api"
     volumes:
       - /app/node_modules
-      - ./server:/app
+      - ./api:/app
     environment:
       - PGUSER=postgres
       - PGHOST=database-1.cuhephxwwjxs.us-east-1.rds.amazonaws.com
       - PGDATABASE=mydb
       - PGPASSWORD=password
       - PGPORT=5432
-      - DB_DIALECT=postgres
   client:
     stdin_open: true
     environment:
