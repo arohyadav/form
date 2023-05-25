@@ -1,0 +1,19 @@
+task definition: react-node-alb
+cluster: rgstech
+service name: rgstechservice33
+name of the application load balancer: reactnodealb 
+target group: reactndetg
+this is a setup with pool .
+The output was successful data was getting inserted in aws rds postgres
+
+this setup consists of two docker files . One in client one in server.
+The client docker file consists of two images nodejs and nginx
+The server docker file consists of one image nodejs and is running on port 5000
+The nginx.conf file is stored in client folder and the docker container is running on port 
+
+How was this implemented.
+
+Changes in nginx.conf file and using only one nginx with react .
+Using Aws load balancer and adding listeners at port 80 and port 5000. 
+Properly configuring /api route according to the website.
+Adding RDS security group port 5432 to load balancer security group
