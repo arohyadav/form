@@ -22,19 +22,20 @@ const Consulting = () => {
     }));
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
     console.log(formValues);
-    try {
-      const res = await axios.post('http://localhost:5000/api/consulting', formValues);
-      console.log(res.data);
-    } catch (err) {
-      console.error(err);
-    }
+    axios.post('/api/consulting', formValues)
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
 
   return (
-    <form onSubmit={handleSubmit} class="consulting-form">
+    <form onSubmit={handleSubmit} className="consulting-form">
       <label>
         First Name:
         <input type="text" name="firstname" value={formValues.firstname} onChange={handleChange} />
