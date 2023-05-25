@@ -25,7 +25,7 @@ const Consulting = () => {
   const handleSubmit = e => {
     e.preventDefault();
     console.log(formValues);
-    axios.post('http://reactnodealb-1687471881.us-east-1.elb.amazonaws.com:5000/api/consulting', formValues)
+    axios.post('/api/consulting', formValues)
       .then(res => {
         console.log(res.data);
       })
