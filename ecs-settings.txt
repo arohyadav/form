@@ -4,7 +4,15 @@ service name: rgstechservice33
 name of the application load balancer: reactnodealb 
 target group: reactndetg
 this is a setup with pool .
-The output was successful data was getting inserted in aws rds postgres
+The output form data was successfully getting inserted in aws rds postgres
+
+
+While creating task definiton. Make both client and server esssential containers.
+Add the correct repository ecr links to the containers. 
+In client listen  port 80 ( Host port 80)
+In server the container host port will be 5000.
+The aws alb acts as a load balancer between containers and the nginx serves the react files to the user and 
+routes to the backend application '/api/consulting' & '/api/contact' routes accordingly based on the setting of nginx.conf
 
 this setup consists of two docker files . One in client one in server.
 The client docker file consists of two images nodejs and nginx
@@ -14,6 +22,9 @@ The nginx.conf file is stored in client folder and the docker container is runni
 How was this implemented.
 
 Changes in nginx.conf file and using only one nginx with react .
-Using Aws load balancer and adding listeners at port 80 and port 5000. 
+Creating a new Aws load balancer at EC2  Dashboard and adding listeners at port 80 and port 5000. 
+Creating a new target group. Choosing IP Address 
 Properly configuring /api route according to the website.
-Adding RDS security group port 5432 to load balancer security group
+Adding RDS security group , port 5432 to load balancer security group.
+
+All these 
