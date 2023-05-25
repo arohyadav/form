@@ -13,24 +13,24 @@ app.use(bodyParser.json());
 
 //initialize middlewares
 app.use(express.json())
-// app.use(cors({ origin: CLIENT_URL, credentials: true }))
+app.use(cors({ origin: CLIENT_URL, credentials: true }))
 
-const pgClient = new Pool({
-  user: 'postgres',
-  host: 'database-1.cuhephxwwjxs.us-east-1.rds.amazonaws.com',
-  database: 'mydb',
-  password: 'password',
-  port: 5432,
-});
+// const pgClient = new Pool({
+//   user: 'postgres',
+//   host: 'database-1.cuhephxwwjxs.us-east-1.rds.amazonaws.com',
+//   database: 'mydb',
+//   password: 'password',
+//   port: 5432,
+// });
 
 // Postgres Client Setup
-// const pgClient = new Pool({
-//   user: keys.pgUser,
-//   host: keys.pgHost,
-//   database: keys.pgDatabase,
-//   password: keys.pgPassword,
-//   port: keys.pgPort,
-// });
+const pgClient = new Pool({
+  user: keys.pgUser,
+  host: keys.pgHost,
+  database: keys.pgDatabase,
+  password: keys.pgPassword,
+  port: keys.pgPort,
+});
 
 pgClient
   .connect()
