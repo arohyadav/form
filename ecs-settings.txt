@@ -11,6 +11,7 @@ While creating task definiton. Make both client and server esssential containers
 Add the correct repository ecr links to the containers. 
 In client listen  port 80 ( Host port 80)
 In server the container host port will be 5000.
+Add the env variables for postgres accordingly. (PGUSER, PGHOST, PGDATABASE , PGPASSWORD , PGPORT)
 The aws alb acts as a load balancer between containers and the nginx serves the react files to the user and 
 routes to the backend application '/api/consulting' & '/api/contact' routes accordingly based on the setting of nginx.conf
 
