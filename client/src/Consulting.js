@@ -25,7 +25,7 @@ const Consulting = () => {
   const handleSubmit = e => {
     e.preventDefault();
     console.log(formValues);
-    axios.post('/api/consulting', formValues)
+    axios.post('http://107.23.127.163:5000/api/consulting', formValues)
       .then(res => {
         console.log(res.data);
       })

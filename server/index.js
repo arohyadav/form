@@ -58,7 +58,6 @@ pgClient.query(
 )
   .catch((err) => console.log(err));
 
-// Route to handle submitting the consulting form
 app.post('/api/consulting', async (req, res) => {
   const {
     firstname,
