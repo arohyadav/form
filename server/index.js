@@ -8,9 +8,9 @@ const app = express();
 
 // const pgClient = new Pool({
 //   user: 'postgres',
-//   host: 'database-1.cuhephxwwjxs.us-east-1.rds.amazonaws.com',
-//   database: 'mydb',
-//   password: 'password',
+//   host: 'localhost',
+//   database: 'postgres',
+//   password: 'arohyadav',
 //   port: 5432,
 // });
 
@@ -28,7 +28,7 @@ pgClient
   .then(() => {
     console.log('Connected to the database');
   })
-  .catch( err => {
+  .catch((err) => {
     console.error('Error connecting to the database:', err);
   });
 
@@ -47,7 +47,7 @@ pgClient.query(
     whatisyourissue VARCHAR NOT NULL
   )`
 )
-  .catch( err => console.log(err));
+  .catch((err) => console.log(err));
 
 // Route to handle submitting the consulting form
 app.post('/api/consulting', async (req, res) => {
