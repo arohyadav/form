@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 //initialize middlewares
 app.use(express.json())
-app.use(cors({ origin: CLIENT_URL, credentials: true }))
+// app.use(cors({ origin: CLIENT_URL, credentials: true }))
 
 // const pgClient = new Pool({
 //   user: 'postgres',
